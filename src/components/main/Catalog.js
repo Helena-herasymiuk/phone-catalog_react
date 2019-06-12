@@ -3,20 +3,27 @@ import Phone from './Phones.js';
 import PhonesService from '../services';
 
 class Catalog extends React.Component {
-	constructor() {
-        super()
+	constructor(props) {
+        super(props);
         this.state = {
             phones: []
         }
     }
      componentDidMount() {
-        PhonesService.getAll().then(data => {
+        this.getAll();
+    }
+
+    componentDidUpdate() {
+        this.getAll();
+    }
+
+    getAll(){
+        PhonesService.getAll(this.props.filter).then(data => {
                 this.setState({
                     phones: data
                 })
             })
     }
-
     renderPhones() {
         const { onPhoneClicked, onAddClicked} = this.props;
     	return (this.state.phones.map((phone) => {

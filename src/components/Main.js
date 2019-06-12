@@ -1,5 +1,6 @@
 import React from 'react';
-import SideBar from './main/SideBar';
+import Cart from './main/Cart';
+import Filter from './main/Filter';
 import Viewer from './main/Viewer';
 import Catalog from './main/Catalog';
 import PhonesService from './services';
@@ -10,75 +11,110 @@ class Main extends React.Component {
     super();
 
     this.state = {
-      viewer : "hidden",
-      catalog : "shown",
-      phoneSelected : "",
-      phoneAdded : []
+      filter : {
+      	order : "name",
+      	query : ""
+      },
+      phoneSelected : null,
+      phoneAdded : {}
       };
+
+    this.addItem = (phone) => {
+      let i = this.state.phoneAdded[phone];
+	     if (!this.state.phoneAdded.hasOwnProperty(phone)) {
+	     	i = 0;
+	     } 
+	     ++i;
+         this.setState ({
+         	phoneAdded : {
+	      		...this.state.phoneAdded,
+         		[phone] :  i} 		
+         })
+    };
+
+    this.queryChange = this.queryChange.bind(this)
+    this.orderChange = this.orderChange.bind(this)
+
+
+
+
+	this.removeItem = (phone) => {
+      	let i = this.state.phoneAdded[phone];
+		--i;
+		if (this.state.phoneAdded.hasOwnProperty(phone)) {
+	      
+	     	this.setState ({
+         	phoneAdded : {
+	      		...this.state.phoneAdded,
+         		[phone] :  i} 		
+         })
+	     } 
+	     if (i === 0) {
+     		 delete this.state.phoneAdded[phone];
+    		this.setState (this.state)
+    	}   
+	}
     }
+
+    queryChange(event) {
+    	this.setState ({
+    		filter : {
+    			...this.state.filter,
+		      	query : event.target.value
+    	}})
+    };
+
+    orderChange(event) {
+    	this.setState ({
+    		filter : {
+    			...this.state.filter,
+		      	order : event.target.value
+    	}})
+    };
+
 
     handleClick = id => {
     	this.setState({
-    		viewer : "shown",
-            catalog : "hidden",
             phoneSelected : id
     	})
     }
 
     handleBackClick = ()=> {
     	this.setState({
-    		viewer : "hidden",
-            catalog : "shown",
             phoneSelected : ""
     	})
     }
 
-    handleAddClick = name =>{
-    	this.setState({
-            phoneAdded : name
-    	})
-    }
-
-    showHide() {
-    	const viewer = document.querySelector(".phoneViewer");
-    	const catalog = document.querySelector(".catalog");
-    	const sidebar = document.querySelector(".sidebar");
-
-    	if(this.state.viewer == "shown"){
-     		viewer.style.display = "block";
-     		catalog.style.display = "none";
-     		sidebar.style.display = "none";
-    	}else if (this.state.viewer == "hidden"){
-     		viewer.style.display = " none";
-     		catalog.style.display = "block";
-     		sidebar.style.display = "block";
-     	}
-     }
-
-    componentDidMount(){
-    	this.showHide();
-    }
-
- 	componentDidUpdate() {
-    	this.showHide();
-    }
-
-
 	render(){
 		return(
 			<main>
-			<SideBar 
-				name = {this.state.phoneAdded} 
-			/>
-			<Viewer 
-				display = {this.state.viewer}
-	        	id = {this.state.phoneSelected}
-	        	onBackClicked = {this.handleBackClick}
-			/>
-			<Catalog 
-				onPhoneClicked = {this.handleClick}
-				onAddClicked = {this.handleAddClick}
-			/>
+			
+
+				<Cart 
+					name = {this.state.phoneAdded} 
+					onDeletePhone = {this.removeItem}
+				/>
+
+			{this.state.phoneSelected ? 
+				(<Viewer 
+		        	id = {this.state.phoneSelected}
+		        	onBackClicked = {this.handleBackClick}
+					onAddClicked = {this.addItem}
+			    />
+			    ) : (
+				<>
+				<Filter
+					queryChange = {this.queryChange}
+					orderChange = {this.orderChange}
+				/>
+
+				<Catalog 
+					onPhoneClicked = {this.handleClick}
+					onAddClicked = {this.addItem}
+					filter = {this.state.filter}
+			     /></>)
+			}
+			
 			</main>
 	)}
 }

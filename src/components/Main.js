@@ -3,8 +3,6 @@ import Cart from './main/Cart';
 import Filter from './main/Filter';
 import Viewer from './main/Viewer';
 import Catalog from './main/Catalog';
-import PhonesService from './services';
-
 
 class Main extends React.Component {
     constructor() {
@@ -32,29 +30,25 @@ class Main extends React.Component {
          })
     };
 
-    this.queryChange = this.queryChange.bind(this)
-    this.orderChange = this.orderChange.bind(this)
-
-
-
+    this.queryChange = this.queryChange.bind(this);
+    this.orderChange = this.orderChange.bind(this);
 
 	this.removeItem = (phone) => {
       	let i = this.state.phoneAdded[phone];
 		--i;
-		if (this.state.phoneAdded.hasOwnProperty(phone)) {
-	      
+		if (this.state.phoneAdded.hasOwnProperty(phone)){
 	     	this.setState ({
-         	phoneAdded : {
-	      		...this.state.phoneAdded,
-         		[phone] :  i} 		
-         })
+	         	phoneAdded : {
+		      		...this.state.phoneAdded,
+	         		[phone] :  i} 		
+         	})
 	     } 
 	     if (i === 0) {
-     		 delete this.state.phoneAdded[phone];
+     		delete this.state.phoneAdded[phone];
     		this.setState (this.state)
     	}   
 	}
-    }
+  }
 
     queryChange(event) {
     	this.setState ({
@@ -72,7 +66,6 @@ class Main extends React.Component {
     	}})
     };
 
-
     handleClick = id => {
     	this.setState({
             phoneSelected : id
@@ -88,14 +81,11 @@ class Main extends React.Component {
 	render(){
 		return(
 			<main>
-			
-
 				<Cart 
 					name = {this.state.phoneAdded} 
 					onDeletePhone = {this.removeItem}
 				/>
-
-			{this.state.phoneSelected ? 
+			  {this.state.phoneSelected ? 
 				(<Viewer 
 		        	id = {this.state.phoneSelected}
 		        	onBackClicked = {this.handleBackClick}
@@ -107,14 +97,12 @@ class Main extends React.Component {
 					queryChange = {this.queryChange}
 					orderChange = {this.orderChange}
 				/>
-
 				<Catalog 
 					onPhoneClicked = {this.handleClick}
 					onAddClicked = {this.addItem}
 					filter = {this.state.filter}
 			     /></>)
-			}
-			
+			  }
 			</main>
 	)}
 }

@@ -10,17 +10,28 @@ body {
   padding: 0;
 }
 
-header {
+header{
   background-color: #EBEDEF;
   height: 60px;
   text-align: center;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #9466EA;
+  box-shadow: 0 4px 10px rgba(38, 38, 38, 0.16);
   margin: 0 0 20px;
 }
 
-header > h1 {
+footer {
+  background-color: #EBEDEF;
+  height: 60px;
+  text-align: center;
+  border-top: 1px solid gray;
+  margin: 20px 0 0;
+}
+
+header > h1,
+footer > h1 {
   margin: 0;
   line-height: 60px;
+  color: #9466EA;
 }
 
 .phone-images {
@@ -34,12 +45,13 @@ header > h1 {
 
 .catalog {
   list-style: none;
-
   padding-inline-start: 0;
   position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 97%;
+  margin: 0 auto 20px; 
 }
 
 .thumb {
@@ -65,13 +77,13 @@ header > h1 {
 }
 
 .phone {
-    display: block;
-    padding: 4px;
-    margin-bottom: 20px;
-    line-height: 1.42857143;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+  display: block;
+  padding: 4px;
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #9466EA;
+  border-radius: 4px;
 }
 
 .catalog li {
@@ -82,67 +94,84 @@ header > h1 {
 
 a {
   cursor: pointer;
+  color:  #9466EA;
+  text-decoration: none;
+}
 
-    color: #337ab7;
-    text-decoration: none;
+a:hover {
+  text-decoration: underline;
 }
 
 p {
-    margin: 5px 0 10px;
+  margin: 5px 0 10px;
+  font-size: 14px;
+  line-height: 15px;
 }
 
-.btn-success {
-    color: #fff;
-    background-color: #5cb85c;
-    border-color: #4cae4c;
+.btn{
+  color: #fff;
+  background-color:  #9466EA;
+  border-color: #E7EFFD;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
 }
 
-.btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
+.cart_btn {
+  margin-left: 5px;
 }
 
+.cart_item {
+  margin-bottom: 5px;
+}
+
+input,
+select {
+  background-color: white;
+  padding: 5px 10px;
+  border: 1px solid #9466EA;
+  border-radius: 4px;
+  margin-left: 5px;
+}
 
 .phoneViewer,
-.sidebar {
-  width: 97%;
-  margin: 0 auto; 
+.cart,
+.filter {
+  width: 95%;
+  margin: 0 auto 20px; 
+  background-color: white;
+  padding: 5px 10px;
+  border: 1px solid #9466EA;
+  border-radius: 4px;
 }
 
+.phoneViewer {
+  width: 96%;
+  min-height: 400px;
+  padding: 20px 0;
+}
 
-.buttons > button {
-      display: inline-block;
-    text-align: center;
-    align-items: flex-start;
-    background-color: buttonface;
-    padding: 1px 6px;
-    border-width: 2px;
-    margin-right: 10px;
+.phoneViewer_info {
+  box-sizing: border-box;
+  margin: 5px;
+  padding: 5px;
 }
 
 img.phoneDetail {
   float: left;
-  margin-right: 3em;
-  margin-bottom: 2em;
   background-color: white;
-  padding: 2em;
+  padding: 0;
   height: 400px;
   width: 400px;
 }
@@ -150,7 +179,6 @@ img.phoneDetail {
 img.phone:first-child {
   display: block;
 }
-
 
 ul.phone-thumbs {
   margin: 0;

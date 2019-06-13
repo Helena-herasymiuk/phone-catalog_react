@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Filter = (props) => (
-    <div className="fiter">
+    <div className="filter">
       <p>
         Search : 
         <input 

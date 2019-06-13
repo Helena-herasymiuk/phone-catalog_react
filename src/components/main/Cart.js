@@ -1,20 +1,23 @@
 import React from 'react';
 
 const Cart = (props) => (
-  <section>
+  <div className="cart">
     <p>Shopping Cart</p>
-    <ul>
+    <ul className="cart_ul">
       { Object.entries(props.name).map(([item, index]) => (
-        <li key={item + index}>
+        <li key={item + index} 
+            className="cart_item">
           {item} - {index}
-          <button onClick ={()=> {
-            props.onDeletePhone(item)}}
+          <button 
+              className="btn cart_btn"
+              onClick ={()=> {
+                props.onDeletePhone(item)}}
           >
           x</button>
         </li>
       )) }
     </ul>
-  </section>
+  </div>
 );
 
 export default Cart;

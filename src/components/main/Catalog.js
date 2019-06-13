@@ -19,11 +19,12 @@ class Catalog extends React.Component {
 
     getAll(){
         PhonesService.getAll(this.props.filter).then(data => {
-                this.setState({
-                    phones: data
-                })
+            this.setState({
+                phones: data
             })
+        })
     }
+
     renderPhones() {
         const { onPhoneClicked, onAddClicked} = this.props;
     	return (this.state.phones.map((phone) => {
@@ -47,6 +48,5 @@ class Catalog extends React.Component {
 	    return <ul className="catalog">{this.renderPhones()}</ul>
 	}
 }
-
 
 export default Catalog;

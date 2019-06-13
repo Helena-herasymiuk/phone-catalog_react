@@ -3,7 +3,7 @@ import React from 'react';
 function Footer() {
 	return(
 		<footer>
-		  <h3> Phone Catalog </h3>
+		  <h1> Phone Catalog </h1>
 		</footer>
 	    )
 }
